@@ -45,7 +45,7 @@ public class BuyStock extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String selectedStock = request.getParameter("stock");
-		String selectedStockExchange = request.getParameter("stockEchange");
+		String selectedStockExchange = request.getParameter("stockExchange");
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
