@@ -50,7 +50,7 @@ public class BuyStock extends HttpServlet {
 		
 		// generate HTML header
 		generateHTMLHeader(out);
-		out.println("<h1>"+selectedStock+"</h1>");
+		out.println("<h1>Buy "+selectedStock+"</h1>");
 		
 		UddiManager uddiManager = UddiManager.getInstance();
 		
