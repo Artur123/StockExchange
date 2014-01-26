@@ -7,7 +7,6 @@ public class WebUser {
 	public WebUser(String name) {
 		this.name = name;
 
-		Depot depot = new Depot();
 	}
 
 	public String getName() {
