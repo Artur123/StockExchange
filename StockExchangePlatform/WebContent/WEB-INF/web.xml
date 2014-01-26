@@ -49,4 +49,34 @@
     <servlet-name>Test</servlet-name>
     <url-pattern>/Test</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExecuteBuyStock</display-name>
+    <servlet-name>ExecuteBuyStock</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.ExecuteBuyStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExecuteBuyStock</servlet-name>
+    <url-pattern>/ExecuteBuyStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SellStock</display-name>
+    <servlet-name>SellStock</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.SellStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SellStock</servlet-name>
+    <url-pattern>/SellStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExecuteSellStock</display-name>
+    <servlet-name>ExecuteSellStock</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.ExecuteSellStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExecuteSellStock</servlet-name>
+    <url-pattern>/ExecuteSellStock</url-pattern>
+  </servlet-mapping>
 </web-app>

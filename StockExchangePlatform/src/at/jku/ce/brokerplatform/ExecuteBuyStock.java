@@ -3,7 +3,6 @@ package at.jku.ce.brokerplatform;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,22 +12,22 @@ import javax.servlet.http.HttpSession;
 import javax.xml.namespace.QName;
 
 import at.jku.ce.juddi.UddiManager;
+import at.jku.ce.stockexchange.service.Exchange;
 import at.jku.ce.stockexchange.service.ExchangeService;
 import at.jku.ce.stockexchange.service.ExchangeServiceService;
-import at.jku.ce.stockexchange.service.Stock;
 
 /**
- * Servlet implementation class BuyStock
+ * Servlet implementation class ExecuteBuyStock
  */
-public class BuyStock extends HttpServlet {
+public class ExecuteBuyStock extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	 private static final QName SERVICE_NAME = new QName("http://service.stockexchange.ce.jku.at/", "ExchangeServiceService");
+	private static final QName SERVICE_NAME = new QName("http://service.stockexchange.ce.jku.at/", "ExchangeServiceService");
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BuyStock() {
+    public ExecuteBuyStock() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,29 +43,41 @@ public class BuyStock extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String selectedStock = request.getParameter("selectedStock");
+		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		
 		HttpSession session = request.getSession();
-		//String selectedStockExchange = request.getParameter("stockExchange");
 		String selectedStockExchange = (String) session.getAttribute("selectedStockExchange");
-		session.setAttribute("selectedStock", selectedStock);
+		String selectedStock = (String) session.getAttribute("selectedStock");
+		String user = (String) session.getAttribute("user");
+		
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
 		out.println(HTMLHelper.generateHTMLHeader());
-		out.println("<h1>Buy from "+selectedStockExchange+ ": Stock " + selectedStock + "</h1>");
+		out.println("<h1>Finished transaction for buying " + selectedStock + "</h1>");
 		
-//		UddiManager uddiManager = UddiManager.getInstance();
+		UddiManager uddiManager = UddiManager.getInstance();
 		
-//		String accessPoint = uddiManager.getPublishedAccessPointFor(selectedStockExchange);
-//		ExchangeServiceService ss = new ExchangeServiceService(new URL(accessPoint), SERVICE_NAME);
-//      ExchangeService port = ss.getExchangeServicePort();  
+		String accessPoint = uddiManager.getPublishedAccessPointFor(selectedStockExchange);
+		ExchangeServiceService ss = new ExchangeServiceService(new URL(accessPoint), SERVICE_NAME);
+        ExchangeService port = ss.getExchangeServicePort();  
 		
-        //input field for quantity
-        out.println("<form action='ExecuteBuyStock' method='post'>");
-        out.println("<input type='text' name='quantity'/>");
-        out.println("<input type='submit' value='buy!'>");
-        out.println("</form>");
+        Exchange result = port.buyStock(selectedStock, quantity);
+        
+        out.println("<p>Execution " + result.getExecution() + "<p>Order: " + result.getOrder());
+        
+        //add to depot
+        StockDepotElement s = new StockDepotElement();
+        s.setIsin(result.getStock().getIsin());
+        s.setName(result.getStock().getName());
+        s.setCurrency(result.getStock().getCurrency());
+        s.setMic(result.getStockExchange().getMic());
+        s.setQuantity(result.getExecution());
+        
+        StockDepotManager.getInstance().addStock(user, s);
+        
+        out.println("<p><a href='depotOverview.jsp'>Back to depot overview</a>");
+        
         // generate HTML footer
         out.println(HTMLHelper.generateHTMLFooter());
 		out.close();

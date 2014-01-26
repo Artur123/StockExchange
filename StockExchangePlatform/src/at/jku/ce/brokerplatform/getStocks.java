@@ -62,7 +62,7 @@ public class getStocks extends HttpServlet {
         out.println("<form action='BuyStock' method='post'>");
         out.println("<ul>");
         for(Stock s : port.getTradedStocks()){
-        	out.println("<li><input type='radio' name='stock' value='" + s.getIsin() + "'>" + s.getName() + "</li>");
+        	out.println("<li><input type='radio' name='selectedStock' value='" + s.getIsin() + "'>" + s.getName() + "</li>");
         }
         out.println("</ul>");
         out.println("<input type='submit' value='buy selected stock'>");

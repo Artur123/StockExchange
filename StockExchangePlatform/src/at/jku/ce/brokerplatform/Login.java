@@ -36,15 +36,17 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user = request.getParameter("user");
 		HttpSession session = request.getSession();
-		//TODO: ändern
-		WebUser webuser = new WebUser("test");
+		session.setAttribute("user", user);
+		
+//		//TODO: ändern
+//		WebUser webuser = new WebUser("test");
+
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
 		out.println(HTMLHelper.generateHTMLHeader());
-		out.println("login successful for user " + user);
-		out.println("<br />Click <a href=\"depotOverview\">here</a> to get to your depot overview.<br />");
-
+		out.println("Welcome user '" + user + "'");
+		out.println("<p> <a href='depotOverview.jsp'>show depot</a>");
 	
         // generate HTML footer
 		out.println(HTMLHelper.generateHTMLFooter());
