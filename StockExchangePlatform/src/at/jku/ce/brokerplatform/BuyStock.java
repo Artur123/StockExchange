@@ -45,12 +45,16 @@ public class BuyStock extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String selectedStock = request.getParameter("stock");
-		String selectedStockExchange = request.getParameter("stockExchange");
+		
+		HttpSession session = request.getSession();
+		//String selectedStockExchange = request.getParameter("stockExchange");
+		String selectedStockExchange = (String) session.getAttribute("selectedStockExchange");
+		session.setAttribute("selectedStock", selectedStock);
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
 		generateHTMLHeader(out);
-		out.println("<h1>Buy "+selectedStock+"</h1>");
+		out.println("<h1>Buy from "+selectedStockExchange+ ": Stock " + selectedStock + "</h1>");
 		
 		UddiManager uddiManager = UddiManager.getInstance();
 		
