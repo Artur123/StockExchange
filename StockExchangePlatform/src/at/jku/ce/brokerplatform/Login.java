@@ -41,25 +41,15 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
-		generateHTMLHeader(out);
+		out.println(HTMLHelper.generateHTMLHeader());
 		out.println("login successful for user " + user);
 		out.println("<br />Click <a href=\"depotOverview\">here</a> to get to your depot overview.<br />");
 
 	
         // generate HTML footer
-		generateHTMLFooter(out);
+		out.println(HTMLHelper.generateHTMLFooter());
 		out.close();
 	}
 
-	private void generateHTMLHeader(PrintWriter out) {
-		out.println("<html>");
-		out.println("<head>");
-		out.println("</head>");
-		out.println("<body>");
-	}
-
-	private void generateHTMLFooter(PrintWriter out) {
-		out.println("</body>");
-		out.println("</html>");
-	}
+	
 }

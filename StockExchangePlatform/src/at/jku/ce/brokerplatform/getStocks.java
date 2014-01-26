@@ -49,7 +49,7 @@ public class getStocks extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
-		generateHTMLHeader(out);
+		out.println(HTMLHelper.generateHTMLHeader());
 		out.println("<h1>"+selectedStockExchange+"</h1>");
 		
 		// get all stocks of selected stock exchange and output them to a list
@@ -77,20 +77,7 @@ public class getStocks extends HttpServlet {
         //List<Stock> currentStocks = (List<Stock>) session.getAttribute("currentStocks");
         
         // generate HTML footer
-		generateHTMLFooter(out);
+		out.println(HTMLHelper.generateHTMLFooter());
 		out.close();
 	}
-
-	private void generateHTMLHeader(PrintWriter out) {
-		out.println("<html>");
-		out.println("<head>");
-		out.println("</head>");
-		out.println("<body>");
-	}
-
-	private void generateHTMLFooter(PrintWriter out) {
-		out.println("</body>");
-		out.println("</html>");
-	}
-
 }

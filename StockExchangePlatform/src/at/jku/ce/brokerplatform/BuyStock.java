@@ -53,7 +53,7 @@ public class BuyStock extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		// generate HTML header
-		generateHTMLHeader(out);
+		out.println(HTMLHelper.generateHTMLHeader());
 		out.println("<h1>Buy from "+selectedStockExchange+ ": Stock " + selectedStock + "</h1>");
 		
 		UddiManager uddiManager = UddiManager.getInstance();
@@ -68,20 +68,8 @@ public class BuyStock extends HttpServlet {
         out.println("<input type='submit' value='buy!'>");
         out.println("</form>");
         // generate HTML footer
-		generateHTMLFooter(out);
+        out.println(HTMLHelper.generateHTMLFooter());
 		out.close();
-	}
-
-	private void generateHTMLHeader(PrintWriter out) {
-		out.println("<html>");
-		out.println("<head>");
-		out.println("</head>");
-		out.println("<body>");
-	}
-
-	private void generateHTMLFooter(PrintWriter out) {
-		out.println("</body>");
-		out.println("</html>");
 	}
 
 }
