@@ -62,20 +62,19 @@ public class getStocks extends HttpServlet {
         out.println("<form action='BuyStock' method='post'>");
         out.println("<ul>");
         for(Stock s : port.getTradedStocks()){
-        	//out.println("<li>"+ s.getName()+"</li>");
         	out.println("<li><input type='radio' name='stock' value='" + s.getIsin() + "'>" + s.getName() + "</li>");
         }
         out.println("</ul>");
-        out.println("<input type='hidden' name='stockExchange' value='" + selectedStockExchange + "'/>");
         out.println("<input type='submit' value='buy selected stock'>");
         out.println("</form>");
       
         // store stocks in session for further use
         HttpSession session = request.getSession();
-        session.setAttribute("currentStocks", port.getTradedStocks());
+        session.setAttribute("selectedStockExchange", selectedStockExchange);
+        //session.setAttribute("currentStocks", port.getTradedStocks());
         
         //retrieve objects from session
-        List<Stock> currentStocks = (List<Stock>) session.getAttribute("currentStocks");
+        //List<Stock> currentStocks = (List<Stock>) session.getAttribute("currentStocks");
         
         // generate HTML footer
 		generateHTMLFooter(out);
