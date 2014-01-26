@@ -54,13 +54,9 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/commons-configuration-1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/commons-lang-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/commons-logging-api-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/juddi-client-3.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/juddi-core-openjpa-3.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Manuel/git/StockExchange/StockExchangePlatform/WebContent/WEB-INF/lib/uddi-ws-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/ce/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/ce/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/ce/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
