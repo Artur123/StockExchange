@@ -27,7 +27,8 @@ public class StockDepotManager {
 		
 		//check if stock is already in the depot of the user
 		for(i=0;i<stocks.get(user).size();i++){
-			if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(stock.getIsin())){
+			if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(stock.getIsin()) &&
+					stocks.get(user).get(i).getMic().equalsIgnoreCase(stock.getMic())){
 				stocks.get(user).get(i).increaseQuantity(stock.getQuantity());
 				break;
 			}
@@ -43,7 +44,8 @@ public class StockDepotManager {
 		if(stocks.containsKey(user)){
 			//select stock
 			for(int i=0;i<stocks.get(user).size();i++){
-				if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(stock.getIsin())){
+				if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(stock.getIsin()) &&
+						stocks.get(user).get(i).getMic().equalsIgnoreCase(stock.getMic())){
 					stocks.get(user).get(i).decreaseQuantity(stock.getQuantity());
 					//delete if user has sold his last stocks
 					if(stocks.get(user).get(i).getQuantity() == 0)

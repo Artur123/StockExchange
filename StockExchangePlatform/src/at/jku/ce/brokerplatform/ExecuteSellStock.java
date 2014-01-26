@@ -64,21 +64,25 @@ public class ExecuteSellStock extends HttpServlet {
         ExchangeService port = ss.getExchangeServicePort();  
 		
       //check if there are enough stocks for sale
-        StockDepotElement s = StockDepotManager.getInstance().getStock(user, selectedStock, selectedStockExchange);
+        int availableStocks = StockDepotManager.getInstance().getStock(user, selectedStock, selectedStockExchange).getQuantity();
         
         int execution;
-        if(s.getQuantity() >= quantity){
+        if(availableStocks >= quantity){
         	execution = quantity;
         }else{
-        	execution = s.getQuantity();
+        	execution = availableStocks;
         }
         
         port.sellStock(selectedStock, execution);
         
-        out.println("<p>Execution " + s.getQuantity() + "<p>Order: " + quantity);
+        out.println("<p>Execution " + execution + "<p>Order: " + quantity);
         //update depot
-        s.setQuantity(execution);
-        StockDepotManager.getInstance().removeStock(user, s);
+        
+        StockDepotElement st = new StockDepotElement();
+        st.setIsin(selectedStock);
+        st.setMic(selectedStockExchange);
+        st.setQuantity(execution);
+        StockDepotManager.getInstance().removeStock(user, st);
         
         out.println("<p><a href='depotOverview.jsp'>Back to depot overview</a>");
         
