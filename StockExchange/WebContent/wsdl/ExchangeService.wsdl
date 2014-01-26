@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ExchangeServiceService" targetNamespace="http://service.stockexchange.ce.jku.at/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.stockexchange.ce.jku.at/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://service.stockexchange.ce.jku.at/" version="1.0" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://service.stockexchange.ce.jku.at/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xs:element name="buyStock" type="tns:buyStock"/>
+<xs:element name="buyStockResponse" type="tns:buyStockResponse"/>
+<xs:element name="getExchanges" type="tns:getExchanges"/>
+<xs:element name="getExchangesResponse" type="tns:getExchangesResponse"/>
+<xs:element name="getStock" type="tns:getStock"/>
+<xs:element name="getStockResponse" type="tns:getStockResponse"/>
+<xs:element name="getTradedStocks" type="tns:getTradedStocks"/>
+<xs:element name="getTradedStocksResponse" type="tns:getTradedStocksResponse"/>
+<xs:element name="reset" type="tns:reset"/>
+<xs:element name="resetResponse" type="tns:resetResponse"/>
+<xs:element name="sellStock" type="tns:sellStock"/>
+<xs:element name="sellStockResponse" type="tns:sellStockResponse"/>
+<xs:complexType name="buyStock">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element name="arg1" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="buyStockResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:exchange"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="exchange">
+<xs:sequence>
+<xs:element minOccurs="0" name="exchangeDate" type="xs:dateTime"/>
+<xs:element name="execution" type="xs:int"/>
+<xs:element name="order" type="xs:int"/>
+<xs:element name="sale" type="xs:boolean"/>
+<xs:element minOccurs="0" name="stock" type="tns:stock"/>
+<xs:element minOccurs="0" name="stockExchange" type="tns:stockExchange"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="stock">
+<xs:sequence>
+<xs:element name="availability" type="xs:int"/>
+<xs:element minOccurs="0" name="currency" type="xs:string"/>
+<xs:element minOccurs="0" name="isin" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="price" type="xs:double"/>
+<xs:element minOccurs="0" name="publication" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="stockExchange">
+<xs:sequence>
+<xs:element minOccurs="0" name="mic" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getExchanges">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getExchangesResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:exchange"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sellStock">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element name="arg1" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sellStockResponse">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getStock">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getStockResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:stock"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getTradedStocks">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="getTradedStocksResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:stock"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="reset">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="resetResponse">
+<xs:sequence/>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getTradedStocks">
+    <wsdl:part name="parameters" element="tns:getTradedStocks">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buyStockResponse">
+    <wsdl:part name="parameters" element="tns:buyStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="reset">
+    <wsdl:part name="parameters" element="tns:reset">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="resetResponse">
+    <wsdl:part name="parameters" element="tns:resetResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="buyStock">
+    <wsdl:part name="parameters" element="tns:buyStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sellStock">
+    <wsdl:part name="parameters" element="tns:sellStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sellStockResponse">
+    <wsdl:part name="parameters" element="tns:sellStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getExchangesResponse">
+    <wsdl:part name="parameters" element="tns:getExchangesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTradedStocksResponse">
+    <wsdl:part name="parameters" element="tns:getTradedStocksResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStock">
+    <wsdl:part name="parameters" element="tns:getStock">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getExchanges">
+    <wsdl:part name="parameters" element="tns:getExchanges">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getStockResponse">
+    <wsdl:part name="parameters" element="tns:getStockResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ExchangeService">
+    <wsdl:operation name="buyStock">
+      <wsdl:input name="buyStock" message="tns:buyStock">
+    </wsdl:input>
+      <wsdl:output name="buyStockResponse" message="tns:buyStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getExchanges">
+      <wsdl:input name="getExchanges" message="tns:getExchanges">
+    </wsdl:input>
+      <wsdl:output name="getExchangesResponse" message="tns:getExchangesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sellStock">
+      <wsdl:input name="sellStock" message="tns:sellStock">
+    </wsdl:input>
+      <wsdl:output name="sellStockResponse" message="tns:sellStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStock">
+      <wsdl:input name="getStock" message="tns:getStock">
+    </wsdl:input>
+      <wsdl:output name="getStockResponse" message="tns:getStockResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTradedStocks">
+      <wsdl:input name="getTradedStocks" message="tns:getTradedStocks">
+    </wsdl:input>
+      <wsdl:output name="getTradedStocksResponse" message="tns:getTradedStocksResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reset">
+      <wsdl:input name="reset" message="tns:reset">
+    </wsdl:input>
+      <wsdl:output name="resetResponse" message="tns:resetResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExchangeServiceServiceSoapBinding" type="tns:ExchangeService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="buyStock">
+      <soap:operation soapAction="urn:BuyStock" style="document"/>
+      <wsdl:input name="buyStock">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="buyStockResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getExchanges">
+      <soap:operation soapAction="urn:GetExchanges" style="document"/>
+      <wsdl:input name="getExchanges">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getExchangesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sellStock">
+      <soap:operation soapAction="urn:SellStock" style="document"/>
+      <wsdl:input name="sellStock">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sellStockResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStock">
+      <soap:operation soapAction="urn:GetStock" style="document"/>
+      <wsdl:input name="getStock">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getStockResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTradedStocks">
+      <soap:operation soapAction="urn:GetTradedStocks" style="document"/>
+      <wsdl:input name="getTradedStocks">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getTradedStocksResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reset">
+      <soap:operation soapAction="urn:Reset" style="document"/>
+      <wsdl:input name="reset">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="resetResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExchangeServiceService">
+    <wsdl:port name="ExchangeServicePort" binding="tns:ExchangeServiceServiceSoapBinding">
+      <soap:address location="http://localhost:8080/Group103StockExchange/services/ExchangeServicePort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
