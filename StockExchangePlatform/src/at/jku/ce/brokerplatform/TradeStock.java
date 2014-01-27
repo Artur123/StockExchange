@@ -65,6 +65,7 @@ public class TradeStock extends HttpServlet {
 	        //input field for quantity
 	        out.println("<form action='ExecuteTransaction' method='post'>");
 	        out.println("<input type='text' name='quantity'/>");
+	        out.println("(enter negative number to sell stocks)");
 	        out.println("<input type='submit' value='transact!'>");
 	        out.println("</form>");
 	        // generate HTML footer

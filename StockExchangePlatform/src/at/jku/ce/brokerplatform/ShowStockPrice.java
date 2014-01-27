@@ -19,7 +19,7 @@ import at.jku.ce.stockexchange.service.Stock;
 /**
  * Servlet implementation class showStockPrice
  */
-public class showStockPrice extends HttpServlet {
+public class ShowStockPrice extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private static final QName SERVICE_NAME = new QName("http://service.stockexchange.ce.jku.at/", "ExchangeServiceService");
@@ -27,7 +27,7 @@ public class showStockPrice extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public showStockPrice() {
+    public ShowStockPrice() {
         super();
         // TODO Auto-generated constructor stub
     }

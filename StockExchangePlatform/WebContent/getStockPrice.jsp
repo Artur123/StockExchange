@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="showStockPrice" method="post">
+	<form action="ShowStockPrice" method="post">
 		<p>no difference between registered and unregistered user yet, everyone gets the latest prices<p>
 		Stockexchange:<input type="text" name="selectedStockExchange"><br>
 		Isin:<input type="text" name="selectedStock"><br>

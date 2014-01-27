@@ -111,12 +111,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>showStockPrice</display-name>
-    <servlet-name>showStockPrice</servlet-name>
-    <servlet-class>at.jku.ce.brokerplatform.showStockPrice</servlet-class>
+    <display-name>ShowStockPrice</display-name>
+    <servlet-name>ShowStockPrice</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.ShowStockPrice</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>showStockPrice</servlet-name>
-    <url-pattern>/showStockPrice</url-pattern>
+    <servlet-name>ShowStockPrice</servlet-name>
+    <url-pattern>/ShowStockPrice</url-pattern>
   </servlet-mapping>
 </web-app>
