@@ -9,7 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
+ <servlet>
     <description></description>
     <display-name>getStocks</display-name>
     <servlet-name>getStocks</servlet-name>
@@ -38,6 +38,26 @@
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TradeStock</display-name>
+    <servlet-name>TradeStock</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.TradeStock</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TradeStock</servlet-name>
+    <url-pattern>/TradeStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ExecuteTransaction</display-name>
+    <servlet-name>ExecuteTransaction</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.ExecuteTransaction</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ExecuteTransaction</servlet-name>
+    <url-pattern>/ExecuteTransaction</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

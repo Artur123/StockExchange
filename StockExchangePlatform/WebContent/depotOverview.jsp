@@ -29,8 +29,8 @@
 			    			"<td>" + list.get(i).getIsin() + "</td>" +
 			    			"<td>" + list.get(i).getMic() + "</td>" +
 			    			"<td>" + list.get(i).getQuantity() + "</td>" +
-			    			"<td><a href='SellStock?selectedStockExchange=" + list.get(i).getMic() + 
-			    			"&selectedStock=" + list.get(i).getIsin() + "'>sell</a></td>" +
+			    			"<td><a href='TradeStock?selectedStockExchange=" + list.get(i).getMic() + 
+			    			"&selectedStock=" + list.get(i).getIsin() + "'>trade</a></td>" +
 			    			"</tr>");
 				}
 			}

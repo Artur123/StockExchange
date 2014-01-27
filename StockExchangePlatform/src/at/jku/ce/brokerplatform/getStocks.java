@@ -59,13 +59,13 @@ public class getStocks extends HttpServlet {
 		ExchangeServiceService ss = new ExchangeServiceService(new URL(accessPoint), SERVICE_NAME);
         ExchangeService port = ss.getExchangeServicePort();  
         
-        out.println("<form action='BuyStock' method='post'>");
+        out.println("<form action='TradeStock' method='post'>");
         out.println("<ul>");
         for(Stock s : port.getTradedStocks()){
         	out.println("<li><input type='radio' name='selectedStock' value='" + s.getIsin() + "'>" + s.getName() + "</li>");
         }
         out.println("</ul>");
-        out.println("<input type='submit' value='buy selected stock'>");
+        out.println("<input type='submit' value='trade selected stock'>");
         out.println("</form>");
       
         // store stocks in session for further use
