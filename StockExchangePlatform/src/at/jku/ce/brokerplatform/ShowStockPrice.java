@@ -49,7 +49,7 @@ public class ShowStockPrice extends HttpServlet {
 			String selectedStock = request.getParameter("selectedStock");
 			
 			HttpSession session = request.getSession();
-			String user = request.getParameter("user");
+			String user = (String) session.getAttribute("user");
 			// generate HTML header
 			out.println(HTMLHelper.generateHTMLHeader());
 			out.println("<h1>Pricequery</h1>");

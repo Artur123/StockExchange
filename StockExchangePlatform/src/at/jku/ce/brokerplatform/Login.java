@@ -51,8 +51,12 @@ public class Login extends HttpServlet {
 		}else{
 			out.println("unregistered user");
 		}
-		//TODO: Links for price of stock
+		//link to list of stocks
+		out.println("<p> <a href='listStocksSelectStockExchange.jsp'>show stocks for stockexchange</a>");
+		
+		//link for price of stock		
 		out.println("<p> <a href='getStockPrice.jsp'>get price for stock</a>");
+		
         // generate HTML footer
 		out.println(HTMLHelper.generateHTMLFooter());
 		out.close();
