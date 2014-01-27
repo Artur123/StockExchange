@@ -17,11 +17,12 @@
 	<form action="getStocks" method="post">
 		<p>Please select one of the available stock exchanges:</p>
 		<p>
-		<%	String exchange;
+		<%	
+			String exchange;
 		    for (Iterator<String> i = allBusinesses.iterator(); i.hasNext();) {
 				exchange = i.next();
 				out.println("<input type='radio' name='exchange' value='"+exchange+"'/>"+exchange+"<br/>");
-		}
+			}
 		%>
 		</p>
 		<input type="submit" value="get stocks">		

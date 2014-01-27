@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Depot overview</title>
 </head>
 <body>
 	<% String user = (String) request.getSession().getAttribute("user"); %>
@@ -38,6 +38,7 @@
 	</table>
 	
 	<br>
-	<a href="getExchanges.jsp">Show all exchanges</a>
+	<a href="getExchanges.jsp">Show all exchanges</a><p>
+	<a href='Login'>Back</a>
 </body>
 </html>

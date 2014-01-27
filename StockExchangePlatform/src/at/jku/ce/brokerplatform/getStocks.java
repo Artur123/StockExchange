@@ -44,40 +44,43 @@ public class getStocks extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String selectedStockExchange = request.getParameter("exchange");
 		PrintWriter out = response.getWriter();
-		
-		// generate HTML header
-		out.println(HTMLHelper.generateHTMLHeader());
-		out.println("<h1>"+selectedStockExchange+"</h1>");
-		
-		// get all stocks of selected stock exchange and output them to a list
-		UddiManager uddiManager = UddiManager.getInstance();
-		
-		String accessPoint = uddiManager.getPublishedAccessPointFor(selectedStockExchange);
-		ExchangeServiceService ss = new ExchangeServiceService(new URL(accessPoint), SERVICE_NAME);
-        ExchangeService port = ss.getExchangeServicePort();  
-        
-        out.println("<form action='TradeStock' method='post'>");
-        out.println("<ul>");
-        for(Stock s : port.getTradedStocks()){
-        	out.println("<li><input type='radio' name='selectedStock' value='" + s.getIsin() + "'>" + s.getName() + "</li>");
-        }
-        out.println("</ul>");
-        out.println("<input type='submit' value='trade selected stock'>");
-        out.println("</form>");
-      
-        // store stocks in session for further use
-        HttpSession session = request.getSession();
-        session.setAttribute("selectedStockExchange", selectedStockExchange);
-        //session.setAttribute("currentStocks", port.getTradedStocks());
-        
-        //retrieve objects from session
-        //List<Stock> currentStocks = (List<Stock>) session.getAttribute("currentStocks");
-        
-        // generate HTML footer
-		out.println(HTMLHelper.generateHTMLFooter());
+		try{
+			String selectedStockExchange = request.getParameter("exchange");
+			
+			// generate HTML header
+			out.println(HTMLHelper.generateHTMLHeader());
+			out.println("<h1>"+selectedStockExchange+"</h1>");
+			
+			// get all stocks of selected stock exchange and output them to a list
+			UddiManager uddiManager = UddiManager.getInstance();
+			
+			String accessPoint = uddiManager.getPublishedAccessPointFor(selectedStockExchange);
+			ExchangeServiceService ss = new ExchangeServiceService(new URL(accessPoint), SERVICE_NAME);
+	        ExchangeService port = ss.getExchangeServicePort();  
+	        
+	        out.println("<form action='TradeStock' method='post'>");
+	        out.println("<ul>");
+	        for(Stock s : port.getTradedStocks()){
+	        	out.println("<li><input type='radio' name='selectedStock' value='" + s.getIsin() + "'>" + s.getName() + "</li>");
+	        }
+	        out.println("</ul>");
+	        out.println("<input type='submit' value='trade selected stock'>");
+	        out.println("</form>");
+	      
+	        // store stocks in session for further use
+	        HttpSession session = request.getSession();
+	        session.setAttribute("selectedStockExchange", selectedStockExchange);
+	        //session.setAttribute("currentStocks", port.getTradedStocks());
+	        
+	        //retrieve objects from session
+	        //List<Stock> currentStocks = (List<Stock>) session.getAttribute("currentStocks");
+	        
+	        // generate HTML footer
+			out.println(HTMLHelper.generateHTMLFooter());
+		}catch(Exception e){
+			out.println(e.toString());
+		}
 		out.close();
 	}
 }

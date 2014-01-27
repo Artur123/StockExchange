@@ -9,7 +9,7 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
- <servlet>
+  <servlet>
     <description></description>
     <display-name>getStocks</display-name>
     <servlet-name>getStocks</servlet-name>
@@ -98,5 +98,25 @@
   <servlet-mapping>
     <servlet-name>ExecuteSellStock</servlet-name>
     <url-pattern>/ExecuteSellStock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Register</display-name>
+    <servlet-name>Register</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.Register</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Register</servlet-name>
+    <url-pattern>/Register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>showStockPrice</display-name>
+    <servlet-name>showStockPrice</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.showStockPrice</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>showStockPrice</servlet-name>
+    <url-pattern>/showStockPrice</url-pattern>
   </servlet-mapping>
 </web-app>

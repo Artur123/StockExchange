@@ -27,7 +27,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		this.doPost(request, response);
 	}
 
 	/**
@@ -45,9 +45,14 @@ public class Login extends HttpServlet {
 		
 		// generate HTML header
 		out.println(HTMLHelper.generateHTMLHeader());
-		out.println("Welcome user '" + user + "'");
-		out.println("<p> <a href='depotOverview.jsp'>show depot</a>");
-	
+		out.println("<h1>Stock exchange platform group L3</h1>");
+		if(user != ""){
+			out.println("<p> <a href='depotOverview.jsp'>show depot</a>");
+		}else{
+			out.println("unregistered user");
+		}
+		//TODO: Links for price of stock
+		out.println("<p> <a href='getStockPrice.jsp'>get price for stock</a>");
         // generate HTML footer
 		out.println(HTMLHelper.generateHTMLFooter());
 		out.close();
