@@ -119,4 +119,14 @@
     <servlet-name>ShowStockPrice</servlet-name>
     <url-pattern>/ShowStockPrice</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListStocks</display-name>
+    <servlet-name>ListStocks</servlet-name>
+    <servlet-class>at.jku.ce.brokerplatform.ListStocks</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListStocks</servlet-name>
+    <url-pattern>/ListStocks</url-pattern>
+  </servlet-mapping>
 </web-app>

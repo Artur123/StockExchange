@@ -46,10 +46,11 @@ public class ShowStockPrice extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try{
 			String selectedStockExchange = request.getParameter("selectedStockExchange");
-			String selectedStock = request.getParameter("selectedStock");
+			String selectedISIN = request.getParameter("selectedISIN");
 			
 			HttpSession session = request.getSession();
 			String user = (String) session.getAttribute("user");
+			
 			// generate HTML header
 			out.println(HTMLHelper.generateHTMLHeader());
 			out.println("<h1>Pricequery</h1>");
@@ -62,13 +63,14 @@ public class ShowStockPrice extends HttpServlet {
 	        ExchangeService port = ss.getExchangeServicePort();  
 	        
 	        Stock result = null;
+	        //retrieve stock based on login status
 	        if(user!=""){
-		        result = port.getStock(selectedStock);
+		        result = port.getStock(selectedISIN);
 	        }else{
 		        //TODO: 10 minutes
-	        	result = port.getStock(selectedStock);
+	        	result = port.getStock(selectedISIN);
 	        }
-	        out.println("price for " + selectedStock +
+	        out.println("price for " + selectedISIN +
 	        		" from Stockexchange " + selectedStockExchange + ": "
 	        		+ result.getPrice() + result.getCurrency());
 	        
@@ -78,6 +80,8 @@ public class ShowStockPrice extends HttpServlet {
 		}catch(Exception e){
 			out.println(e.toString());
 		}
+		
+		out.println("<p><p><a href='home.jsp'>home</a>");
 		// generate HTML footer
 		out.println(HTMLHelper.generateHTMLFooter());
 		out.close();

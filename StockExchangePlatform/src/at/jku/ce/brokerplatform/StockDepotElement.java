@@ -4,15 +4,15 @@ import at.jku.ce.stockexchange.service.Stock;
 
 public class StockDepotElement extends Stock {
 
-	private String mic;
+	private String stockExchange;
 	private int quantity;
 	
-	public String getMic() {
-		return mic;
+	public String getStockExchange() {
+		return stockExchange;
 	}
 
-	public void setMic(String mic) {
-		this.mic = mic;
+	public void setStockExchange(String stockExchange) {
+		this.stockExchange = stockExchange;
 	}
 	
 	public int getQuantity() {

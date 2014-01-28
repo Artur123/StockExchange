@@ -19,18 +19,20 @@
 		<tr>
 			<th>Name</th>
 			<th>ISIN</th>
-			<th>MIC</th>
+			<th>StockExchange</th>
 			<th>Quantity</th>
 		</tr>
-		<%	ArrayList<StockDepotElement> list = StockDepotManager.getInstance().getStocks(user);
+		<!-- Display a table with all stocks of user  -->
+		<%
+			ArrayList<StockDepotElement> list = StockDepotManager.getInstance().getStocks(user);
 			if(list != null){
 			    for (int i=0;i<list.size(); i++) {
 					out.println("<tr><td>" + list.get(i).getName() + "</td>" + 
 			    			"<td>" + list.get(i).getIsin() + "</td>" +
-			    			"<td>" + list.get(i).getMic() + "</td>" +
+			    			"<td>" + list.get(i).getStockExchange() + "</td>" +
 			    			"<td>" + list.get(i).getQuantity() + "</td>" +
-			    			"<td><a href='TradeStock?selectedStockExchange=" + list.get(i).getMic() + 
-			    			"&selectedStock=" + list.get(i).getIsin() + "'>trade</a></td>" +
+			    			"<td><a href='TradeStock?selectedStockExchange=" + list.get(i).getStockExchange() + 
+			    			"&selectedISIN=" + list.get(i).getIsin() + "'>trade</a></td>" +
 			    			"</tr>");
 				}
 			}
@@ -38,7 +40,7 @@
 	</table>
 	
 	<br>
-	<a href="getExchanges.jsp">Show all exchanges</a><p>
-	<a href='Login'>Back</a>
+	<a href="getExchanges.jsp">Trade stocks</a><p>
+	<a href='home.jsp'>Home</a>
 </body>
 </html>

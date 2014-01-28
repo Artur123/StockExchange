@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>List of all stock exchanges</title>
+<title>Select stock exchange</title>
 </head>
 <body>
+	<!-- list all stockexchanges as radio-buttons -->
 	<% UddiManager uddiManager = UddiManager.getInstance();
 	   List<String> allBusinesses = uddiManager.getAllPublishedBusinesses();
 	%>
@@ -25,7 +26,9 @@
 			}
 		%>
 		</p>
-		<input type="submit" value="get stocks">		
+		<input type="submit" value="trade stock">		
 	</form>
+	<p>
+	<a href='home.jsp'>home</a>
 </body>
 </html>

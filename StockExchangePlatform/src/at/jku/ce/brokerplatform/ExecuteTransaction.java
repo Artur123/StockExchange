@@ -48,32 +48,32 @@ public class ExecuteTransaction extends HttpServlet {
 			int quantity = Integer.parseInt(request.getParameter("quantity"));
 			
 			HttpSession session = request.getSession();
-			//String selectedStockExchange = request.getParameter("stockExchange");
 			String selectedStockExchange = (String) session.getAttribute("selectedStockExchange");
-			String selectedStock = (String) session.getAttribute("selectedStock");
+			String selectedISIN = (String) session.getAttribute("selectedISIN");
 			String user = (String) session.getAttribute("user");
 			
 			// generate HTML header
 			out.println(HTMLHelper.generateHTMLHeader());
-			out.println("<h1>Finished transaction for " + selectedStock + "</h1>");
+			out.println("<h1>Transaction result for " + selectedISIN + "</h1>");
 			
 			UddiManager uddiManager = UddiManager.getInstance();
 			
 			String accessPoint = uddiManager.getPublishedAccessPointFor(selectedStockExchange);
 			ExchangeServiceService ss = new ExchangeServiceService(new URL(accessPoint), SERVICE_NAME);
 	        ExchangeService port = ss.getExchangeServicePort();
-	        
+			
+	        //if quantity is positve: buy, otherwise sell
 			if(quantity == 0)
 				out.println("<p>Transaction failed: enter a value higher or lower than 0");
 			else if(quantity < 0){
-	        	executeSellStock(quantity, selectedStockExchange, selectedStock, user,
+	        	executeSellStock(quantity, selectedStockExchange, selectedISIN, user,
 	        			out, port);
 	        }else{
-	        	executeBuyStock(quantity, selectedStock, user, out, port);
+	        	executeBuyStock(quantity, selectedStockExchange, selectedISIN, user, out, port);
 	        }
 	        
-	        out.println("<p><a href='depotOverview.jsp'>Back to depot overview</a>");
-	        
+	        out.println("<p><a href='depotOverview.jsp'>show depot overview</a>");
+	        out.println("<p><a href='home.jsp'>home</a>");
 	        // generate HTML footer
 	        out.println(HTMLHelper.generateHTMLFooter());
 		}catch(Exception e){
@@ -83,19 +83,21 @@ public class ExecuteTransaction extends HttpServlet {
 		}
 	}
 
-	private void executeBuyStock(int quantity, String selectedStock,
+	private void executeBuyStock(int quantity, String selectedStockExchange, String selectedISIN,
 			String user, PrintWriter out, ExchangeService port) {
 		try{
-			Exchange result = port.buyStock(selectedStock, quantity);
+			//execute buy
+			//some stockExchanges return null if stock is not available!
+			Exchange result = port.buyStock(selectedISIN, quantity);
 			
 			out.println("<p>Execution " + result.getExecution() + "<p>Order: " + result.getOrder());
+			//update depot if execution is greater 0
 			if(result.getExecution() > 0){
-				//update depot
 				StockDepotElement s = new StockDepotElement();
 				s.setIsin(result.getStock().getIsin());
 				s.setName(result.getStock().getName());
 				s.setCurrency(result.getStock().getCurrency());
-				s.setMic(result.getStockExchange().getMic());
+				s.setStockExchange(selectedStockExchange);
 				s.setQuantity(result.getExecution());
 				StockDepotManager.getInstance().addStock(user, s);
 			}
@@ -105,25 +107,26 @@ public class ExecuteTransaction extends HttpServlet {
 	}
 
 	private void executeSellStock(int quantity, String selectedStockExchange,
-			String selectedStock, String user, PrintWriter out,
+			String selectedISIN, String user, PrintWriter out,
 			ExchangeService port) {
 		try{
-			//check if there are enough stocks for sale
-			int availableStocks = StockDepotManager.getInstance().getStock(user, selectedStock, selectedStockExchange).getQuantity();
+			//check if user owns stock and has enough to sell
+			int availableStocks = StockDepotManager.getInstance().getStock(user, selectedISIN, selectedStockExchange).getQuantity();
 	        int execution;
+	        //set execution amount, has to be a positive number
 	        if(availableStocks + quantity >= 0){
 	        	execution = -quantity;
 	        }else{
 	        	execution = availableStocks;
 	        }
-	        
-	        port.sellStock(selectedStock, execution);
+	        //execute selling, no return value
+	        port.sellStock(selectedISIN, execution);
 	        out.println("<p>Execution " + -execution + "<p>Order: " + quantity);
 	        
 	        //update depot
 	        StockDepotElement st = new StockDepotElement();
-	        st.setIsin(selectedStock);
-	        st.setMic(selectedStockExchange);
+	        st.setIsin(selectedISIN);
+	        st.setStockExchange(selectedStockExchange);
 	        st.setQuantity(execution);
 	        StockDepotManager.getInstance().removeStock(user, st);
         }catch(NullPointerException e){

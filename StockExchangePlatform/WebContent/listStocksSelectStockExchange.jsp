@@ -14,7 +14,8 @@
 	<% UddiManager uddiManager = UddiManager.getInstance();
 	   List<String> allBusinesses = uddiManager.getAllPublishedBusinesses();
 	%>
-	<form action="listStocks.jsp" method="post">
+	<!-- all stockexchanges in combobox -->
+	<form action="ListStocks" method="post">
 		<p>Please select one of the available stock exchanges:</p>
 		<p>
 		<select name="selectedStockExchange" size="1">
@@ -29,5 +30,7 @@
 		</p>
 		<input type="submit" value="list stocks">
 	</form>
+	<p>
+	<a href='home.jsp'>home</a>
 </body>
 </html>

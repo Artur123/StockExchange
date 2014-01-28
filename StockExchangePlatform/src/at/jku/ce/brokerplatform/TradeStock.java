@@ -31,6 +31,7 @@ public class TradeStock extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//needed because link from depotOverview.jsp is using get-Parameter
 		try{
 			String selectedStockExchange = (String) request.getParameter("selectedStockExchange");
 			HttpSession session = request.getSession();
@@ -49,25 +50,27 @@ public class TradeStock extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		try{
-			String selectedStock = request.getParameter("selectedStock");
-			//String selectedStockExchange = (String) request.getParameter("selectedStockExchange");
+			//get parameter
+			String selectedISIN = request.getParameter("selectedISIN");
 			HttpSession session = request.getSession();
 			
+			//get session attributes and store isin
 			String selectedStockExchange = (String)  session.getAttribute("selectedStockExchange");
-			session.setAttribute("selectedStock", selectedStock);
-			
-			
+			session.setAttribute("selectedISIN", selectedISIN);
 			
 			// generate HTML header
 			out.println(HTMLHelper.generateHTMLHeader());
-			out.println("<h1>Transaction for "+selectedStockExchange+ ": Stock " + selectedStock + "</h1>");
+			out.println("<h1>Transaction for "+selectedStockExchange+ ": Stock " + selectedISIN + "</h1>");
 			
 	        //input field for quantity
 	        out.println("<form action='ExecuteTransaction' method='post'>");
 	        out.println("<input type='text' name='quantity'/>");
-	        out.println("(enter negative number to sell stocks)");
+	        out.println("<p>(enter negative number to sell stocks)");
 	        out.println("<input type='submit' value='transact!'>");
 	        out.println("</form>");
+	        
+	        out.println("<a href='home.jsp'>home</a>");
+	        
 	        // generate HTML footer
 	        out.println(HTMLHelper.generateHTMLFooter());
 		}catch(Exception e){

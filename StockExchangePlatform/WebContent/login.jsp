@@ -4,18 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Register</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>Register</h1>
-	
-	<form action="login.jsp" method="post">
-		<p>Enter username to register:</p>
-		(if empty, user will continue as unregistered user)
-		<p>
-			<input type="text" name="user" /> <br>
-		</p>
-		<input type="submit" value="login">		
-	</form>
+
+	<%
+		String user = request.getParameter("user");
+		
+		//store username as session-attribute for further use
+		//is empty if unregistered
+		session.setAttribute("user", user);
+	%>
+	<h1>Welcome <% out.print(user); %></h1>
+	<a href="home.jsp">continue to homepage</a>
 </body>
 </html>

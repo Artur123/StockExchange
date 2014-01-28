@@ -28,7 +28,7 @@ public class StockDepotManager {
 		//check if stock is already in the depot of the user
 		for(i=0;i<stocks.get(user).size();i++){
 			if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(stock.getIsin()) &&
-					stocks.get(user).get(i).getMic().equalsIgnoreCase(stock.getMic())){
+					stocks.get(user).get(i).getStockExchange().equalsIgnoreCase(stock.getStockExchange())){
 				stocks.get(user).get(i).increaseQuantity(stock.getQuantity());
 				break;
 			}
@@ -45,7 +45,7 @@ public class StockDepotManager {
 			//select stock
 			for(int i=0;i<stocks.get(user).size();i++){
 				if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(stock.getIsin()) &&
-						stocks.get(user).get(i).getMic().equalsIgnoreCase(stock.getMic())){
+						stocks.get(user).get(i).getStockExchange().equalsIgnoreCase(stock.getStockExchange())){
 					stocks.get(user).get(i).decreaseQuantity(stock.getQuantity());
 					//delete if user has sold his last stocks
 					if(stocks.get(user).get(i).getQuantity() == 0)
@@ -63,7 +63,7 @@ public class StockDepotManager {
 	public StockDepotElement getStock(String user, String isin, String mic){
 		for(int i=0;i<stocks.get(user).size();i++){
 			if(stocks.get(user).get(i).getIsin().equalsIgnoreCase(isin) &&
-					stocks.get(user).get(i).getMic().equalsIgnoreCase(mic)){
+					stocks.get(user).get(i).getStockExchange().equalsIgnoreCase(mic)){
 				return stocks.get(user).get(i);
 			}
 		}
