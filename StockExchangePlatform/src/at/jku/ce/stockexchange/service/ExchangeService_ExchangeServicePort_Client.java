@@ -39,16 +39,17 @@ public final class ExchangeService_ExchangeServicePort_Client {
 
         
         UddiManager manager = UddiManager.getInstance();
-//        for(String wsdlURL : manager.getAllPublishedAccessPoints()){
-//        	ExchangeServiceService ss = new ExchangeServiceService(new URL(wsdlURL), SERVICE_NAME);
-//            ExchangeService port = ss.getExchangeServicePort();  
-//            
-//            System.out.println("WSDL: "+ wsdlURL);
-//            for(Stock s : port.getTradedStocks()){
-//            	System.out.println("Exchange exec: "+ s.getName());
-//            }
-//        }
-        manager.publish("L3", "L3exchange", "http://140.78.73.103:8080/StockExchange/services/ExchangeServicePort?wsdl");
+        for(String wsdlURL : manager.getAllPublishedAccessPoints()){
+        	ExchangeServiceService ss = new ExchangeServiceService(new URL(wsdlURL), SERVICE_NAME);
+            ExchangeService port = ss.getExchangeServicePort();  
+            
+            System.out.println("WSDL: "+ wsdlURL);
+            for(Stock s : port.getTradedStocks()){
+            	System.out.println("Exchange exec: "+ s.getName());
+            }
+        }
+      
+        
   
         //automatically created code for testing of services 
 //        {

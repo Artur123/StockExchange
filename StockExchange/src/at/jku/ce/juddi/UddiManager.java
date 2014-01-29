@@ -795,10 +795,10 @@ public class UddiManager {
 //		inst.publish("Group XXL", "Freshservices", "http://localhost:1270");
 		
 		
-//		List<String> businesses = inst.getAllPublishedBusinesses();
-//		for (String business : businesses) {
-//			System.out.println(business);
-//		}
+		List<String> businesses = inst.getAllPublishedBusinesses();
+		for (String business : businesses) {
+			System.out.println(business);
+		}
 	    //call relevant methods for publishing of your service here
 
 
