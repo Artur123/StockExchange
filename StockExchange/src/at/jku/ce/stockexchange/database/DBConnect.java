@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Random;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 
@@ -13,7 +14,7 @@ import at.jku.ce.stockexchange.service.StockExchange;
 public class DBConnect {
 	
 	//TODO: transaction id
-	private static double transactionID = 1.03;
+	private static double transactionID = new Random().nextDouble();
 	
 	private static Connection getConnection() throws SQLException, ClassNotFoundException{
 		try {
@@ -34,8 +35,6 @@ public class DBConnect {
 			cn = getConnection();
 			PreparedStatement pstmt = cn.prepareStatement("INSERT INTO Exchange VALUES(?,?,?,?,?,?,?,?,?,?)");
 			
-			//TODO: right value for transaction_ID
-			transactionID++;
 			pstmt.setDouble(1, transactionID);
 			pstmt.setString(2, exchange.getStockExchange().getMic());
 			pstmt.setString(3, exchange.getStockExchange().getName());
@@ -54,6 +53,9 @@ public class DBConnect {
 			//get datetime from XMLGregorianCalendar
 			Timestamp timestamp = new Timestamp(exchange.getExchangeDate().toGregorianCalendar().getTimeInMillis());
 			pstmt.setTimestamp(10, timestamp);
+			
+			//next transaction_ID
+			transactionID++;
 			
 			pstmt.executeUpdate();
 			pstmt.close();
