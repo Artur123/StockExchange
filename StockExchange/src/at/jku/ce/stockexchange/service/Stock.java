@@ -43,7 +43,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class Stock {
 
-    protected int availability;
+	protected int availability;
     protected String currency;
     protected String isin;
     protected String name;
@@ -51,6 +51,22 @@ public class Stock {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar publication;
 
+    public Stock(){
+    	
+    }
+    
+    public Stock(int availability, String currency, String isin, String name,
+			Double price, XMLGregorianCalendar publication) {
+		super();
+		this.availability = availability;
+		this.currency = currency;
+		this.isin = isin;
+		this.name = name;
+		this.price = price;
+		this.publication = publication;
+	}
+
+    
     /**
      * Gets the value of the availability property.
      * 

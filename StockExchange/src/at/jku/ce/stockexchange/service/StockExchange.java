@@ -36,6 +36,15 @@ public class StockExchange {
     protected String mic;
     protected String name;
 
+    public StockExchange(){
+    	
+    }
+    
+    public StockExchange(String mic, String name){
+    	this.mic = mic;
+    	this.name = name;
+    }
+    
     /**
      * Gets the value of the mic property.
      * 

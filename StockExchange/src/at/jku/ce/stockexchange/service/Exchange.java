@@ -43,7 +43,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class Exchange {
 
-    @XmlSchemaType(name = "dateTime")
+	@XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar exchangeDate;
     protected int execution;
     protected int order;
@@ -51,6 +51,21 @@ public class Exchange {
     protected Stock stock;
     protected StockExchange stockExchange;
 
+    public Exchange(){
+    	
+    }
+    
+    public Exchange(XMLGregorianCalendar exchangeDate, int execution,
+			int order, boolean sale, Stock stock, StockExchange stockExchange) {
+		super();
+		this.exchangeDate = exchangeDate;
+		this.execution = execution;
+		this.order = order;
+		this.sale = sale;
+		this.stock = stock;
+		this.stockExchange = stockExchange;
+	}
+    
     /**
      * Gets the value of the exchangeDate property.
      * 
