@@ -46,6 +46,10 @@ public class ExchangeServiceImpl implements ExchangeService {
     
     private static final StockExchange stockExchange = new StockExchange("L3", "L3exchange");
     
+    public ExchangeServiceImpl(){
+    	reset();
+    }
+    
     /* (non-Javadoc)
      * @see at.jku.ce.stockexchange.service.ExchangeService#buyStock(java.lang.String  arg0 ,)int  arg1 )*
      */
@@ -130,7 +134,7 @@ public class ExchangeServiceImpl implements ExchangeService {
         		stock.setAvailability(stock.getAvailability() + execution);
         		Exchange exchange = new Exchange(getCurrentDate(), execution, order, true, stock, stockExchange);
 		        
-		        //TODO: write to DB
+		        //write to DB
         		DBConnect.addExchange(exchange);
         	}
         } catch (java.lang.Exception ex) {
