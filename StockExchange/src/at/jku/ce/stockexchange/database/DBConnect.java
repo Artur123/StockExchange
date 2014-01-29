@@ -12,6 +12,8 @@ import at.jku.ce.stockexchange.service.StockExchange;
 
 public class DBConnect {
 	
+	//TODO: transaction id
+	private static double transactionID = 1.03;
 	
 	private static Connection getConnection() throws SQLException, ClassNotFoundException{
 		try {
@@ -23,24 +25,36 @@ public class DBConnect {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return DriverManager.getConnection("jdbc:mysql://140.78.73.67:3306/stockexchangeDB","uece","cestock2013");
+		return DriverManager.getConnection("jdbc:mysql://140.78.73.67:3306/stockexchangeDB","ceue","cestock2013");
 	}
 	
 	public static void addExchange(Exchange exchange){
 		Connection cn = null;
 		try {
 			cn = getConnection();
-			PreparedStatement pstmt = cn.prepareStatement("INSERT INTO exchange(mic,stockexchange_name,isin,stock_name,stock_currency,stock_price,order,execution,exchange_date) VALUES(?,?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = cn.prepareStatement("INSERT INTO Exchange VALUES(?,?,?,?,?,?,?,?,?,?)");
 			
-			pstmt.setString(1, exchange.getStockExchange().getMic());
-			pstmt.setString(2, exchange.getStockExchange().getName());
-			pstmt.setString(3, exchange.getStock().getIsin());
-			pstmt.setString(4, exchange.getStock().getName());
-			pstmt.setString(5, exchange.getStock().getCurrency());
-			pstmt.setDouble(6, exchange.getStock().getPrice());
-			pstmt.setInt(7, exchange.getOrder());
-			pstmt.setInt(8, exchange.getExecution());
-			pstmt.setDate(9, java.sql.Date.valueOf(exchange.getExchangeDate().toGregorianCalendar().toString()));
+			//TODO: right value for transaction_ID
+			transactionID++;
+			pstmt.setDouble(1, transactionID);
+			pstmt.setString(2, exchange.getStockExchange().getMic());
+			pstmt.setString(3, exchange.getStockExchange().getName());
+			pstmt.setString(4, exchange.getStock().getIsin());
+			pstmt.setString(5, exchange.getStock().getName());
+			pstmt.setString(6, exchange.getStock().getCurrency());
+			pstmt.setDouble(7, exchange.getStock().getPrice());
+			if(exchange.isSale()){
+				pstmt.setInt(8, -exchange.getOrder());
+				pstmt.setInt(9, -exchange.getExecution());
+			}else{
+				pstmt.setInt(8, exchange.getOrder());
+				pstmt.setInt(9, exchange.getExecution());
+			}
+			
+			//get datetime from XMLGregorianCalendar
+			Timestamp timestamp = new Timestamp(exchange.getExchangeDate().toGregorianCalendar().getTimeInMillis());
+			pstmt.setTimestamp(10, timestamp);
+			
 			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (ClassNotFoundException e) {
@@ -66,7 +80,7 @@ public class DBConnect {
 		Connection cn = null;
 		try {
 			cn = getConnection();
-			PreparedStatement pstmt = cn.prepareStatement("SELECT transaction_id,mic,stockexchange_name,isin,stock_name,stock_currency,stock_price,order,execution,exchange_date FROM exchange WHERE mic=?");
+			PreparedStatement pstmt = cn.prepareStatement("SELECT * FROM Exchange WHERE mic=?");
 			pstmt.setString(1,stockExchange.getMic());
 			
 			ResultSet rs=pstmt.executeQuery();
@@ -76,7 +90,6 @@ public class DBConnect {
 			 	newStock.setName(rs.getString("stock_name"));
 			 	newStock.setPrice(rs.getDouble("stock_price"));
 			 	newStock.setCurrency(rs.getString("stock_currency"));
-			 	//no availability or publication
 			 	
 			 	Exchange newExchange = new Exchange();
 			 	newExchange.setStock(newStock);
@@ -115,5 +128,4 @@ public class DBConnect {
 		
 		return exchanges;
 	}
-		
 }

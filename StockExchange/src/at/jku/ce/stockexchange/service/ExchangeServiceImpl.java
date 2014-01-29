@@ -54,24 +54,6 @@ public class ExchangeServiceImpl implements ExchangeService {
         System.out.println(arg0);
         System.out.println(arg1);
         try {
-//            at.jku.ce.stockexchange.service.Exchange _return = new at.jku.ce.stockexchange.service.Exchange();
-//            _return.setExchangeDate(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-12-08T15:50:23.428+01:00"));
-//            _return.setExecution(161446178);
-//            _return.setOrder(-115833687);
-//            _return.setSale(true);
-//            at.jku.ce.stockexchange.service.Stock _returnStock = new at.jku.ce.stockexchange.service.Stock();
-//            _returnStock.setAvailability(757977868);
-//            _returnStock.setCurrency("Currency-178304350");
-//            _returnStock.setIsin("Isin-846573334");
-//            _returnStock.setName("Name867374292");
-//            _returnStock.setPrice(Double.valueOf(0.04654274104305156));
-//            _returnStock.setPublication(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-12-08T15:50:23.429+01:00"));
-//            _return.setStock(_returnStock);
-//            at.jku.ce.stockexchange.service.StockExchange _returnStockExchange = new at.jku.ce.stockexchange.service.StockExchange();
-//            _returnStockExchange.setMic("Mic-900873175");
-//            _returnStockExchange.setName("Name-762829279");
-//            _return.setStockExchange(_returnStockExchange);
-//            return _return;
 			String isin = arg0;
 			int order = arg1;
 			Exchange exchange = null;
@@ -91,7 +73,7 @@ public class ExchangeServiceImpl implements ExchangeService {
 			    
 			    exchange = new Exchange(getCurrentDate(), execution, order, false, stock, stockExchange);
 			    
-			    //TODO: write to DB
+			    //write to DB
 			    DBConnect.addExchange(exchange);
 			    
 			    return exchange;
@@ -109,30 +91,18 @@ public class ExchangeServiceImpl implements ExchangeService {
     public java.util.List<at.jku.ce.stockexchange.service.Exchange> getExchanges() { 
         LOG.info("Executing operation getExchanges");
         try {
-//            java.util.List<at.jku.ce.stockexchange.service.Exchange> _return = new java.util.ArrayList<at.jku.ce.stockexchange.service.Exchange>();
-//            at.jku.ce.stockexchange.service.Exchange _returnVal1 = new at.jku.ce.stockexchange.service.Exchange();
-//            _returnVal1.setExchangeDate(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-12-08T15:50:23.430+01:00"));
-//            _returnVal1.setExecution(1257629720);
-//            _returnVal1.setOrder(1397546542);
-//            _returnVal1.setSale(true);
-//            at.jku.ce.stockexchange.service.Stock _returnVal1Stock = new at.jku.ce.stockexchange.service.Stock();
-//            _returnVal1Stock.setAvailability(-811323384);
-//            _returnVal1Stock.setCurrency("Currency1763740147");
-//            _returnVal1Stock.setIsin("Isin921208669");
-//            _returnVal1Stock.setName("Name-663284246");
-//            _returnVal1Stock.setPrice(Double.valueOf(0.10439370544494364));
-//            _returnVal1Stock.setPublication(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-12-08T15:50:23.431+01:00"));
-//            _returnVal1.setStock(_returnVal1Stock);
-//            at.jku.ce.stockexchange.service.StockExchange _returnVal1StockExchange = new at.jku.ce.stockexchange.service.StockExchange();
-//            _returnVal1StockExchange.setMic("Mic-2001050064");
-//            _returnVal1StockExchange.setName("Name-889631284");
-//            _returnVal1.setStockExchange(_returnVal1StockExchange);
-//            _return.add(_returnVal1);
-//            return _return;
-            
-            //TODO: connect to DB and get all exchanges
-            
-            return DBConnect.getExchanges(stockExchange);
+            //connect to DB and get all exchanges
+            List<Exchange> exchanges = DBConnect.getExchanges(stockExchange);
+        	
+            for(Exchange e : exchanges){
+            	Stock s = getStock(e.getStock().getIsin());
+            	//set availability for every stock
+            	e.getStock().setAvailability(s.getAvailability());
+            	//set publication for every stock
+            	e.getStock().setPublication(s.getPublication());
+            }
+        	
+            return exchanges;
             
         } catch (java.lang.Exception ex) {
             ex.printStackTrace();
@@ -176,15 +146,6 @@ public class ExchangeServiceImpl implements ExchangeService {
         LOG.info("Executing operation getStock");
         System.out.println(arg0);
         try {
-//            at.jku.ce.stockexchange.service.Stock _return = new at.jku.ce.stockexchange.service.Stock();
-//            _return.setAvailability(-664663998);
-//            _return.setCurrency("Currency1078627339");
-//            _return.setIsin("Isin1159140752");
-//            _return.setName("Name-734581131");
-//            _return.setPrice(Double.valueOf(0.7483187148995077));
-//            _return.setPublication(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-12-08T15:50:23.432+01:00"));
-//            return _return;
-        	
         	String isin = arg0;
         	
         	for(Stock s : stockList){
@@ -204,16 +165,6 @@ public class ExchangeServiceImpl implements ExchangeService {
     public java.util.List<at.jku.ce.stockexchange.service.Stock> getTradedStocks() { 
         LOG.info("Executing operation getTradedStocks");
         try {
-//            java.util.List<at.jku.ce.stockexchange.service.Stock> _return = new java.util.ArrayList<at.jku.ce.stockexchange.service.Stock>();
-//            at.jku.ce.stockexchange.service.Stock _returnVal1 = new at.jku.ce.stockexchange.service.Stock();
-//            _returnVal1.setAvailability(300976336);
-//            _returnVal1.setCurrency("Currency1124662422");
-//            _returnVal1.setIsin("Isin-34448788");
-//            _returnVal1.setName("Name-1951197949");
-//            _returnVal1.setPrice(Double.valueOf(0.17567270170542082));
-//            _returnVal1.setPublication(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar("2013-12-08T15:50:23.433+01:00"));
-//            _return.add(_returnVal1);
-//            return _return;
         	return stockList;
         } catch (java.lang.Exception ex) {
             ex.printStackTrace();
