@@ -2,6 +2,7 @@ package at.jku.ce.brokerplatform;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.servlet.ServletException;
@@ -74,9 +75,10 @@ public class ShowStockPrice extends HttpServlet {
 	        		" from Stockexchange " + selectedStockExchange + ": "
 	        		+ result.getPrice() + result.getCurrency());
 	        
-	        out.println("<p><a href='Login'>Back</a>");
 		}catch(NullPointerException e){
 			out.println("Stock does not exist");
+		}catch(MalformedURLException e){
+			out.println("Stockexchange does not exist or is not available");
 		}catch(Exception e){
 			out.println(e.toString());
 		}
